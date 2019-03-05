@@ -1,4 +1,4 @@
-#### 数据绑定及指令
+#### 数据绑定及指令(vue.js-02)
 ```
 !DOCTYPE html>
 <html lang="en">
@@ -45,7 +45,7 @@ console.log(app.a)
 </html>
 ```
 
-#### 过滤器，指令，事件，语法糖。
+#### 过滤器，指令，事件，语法糖。(vue.js-02)
 ```
 <!DOCTYPE html>
 <html lang="en">
@@ -70,6 +70,7 @@ console.log(app.a)
         <hr>
         {{apple}}<br>
         <span v-text="apple"></span>
+        //v-text指令-解析文本 和{{}}一样
         <hr>
         <span v-html="banana"></span>
         //v-html指令-解析HTML
@@ -84,6 +85,7 @@ console.log(app.a)
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script>
         var plusDate = function (value) {
+            //value 写不写都存在
             return value < 10 ? '0' + value : value
         }
         var App = new Vue({
@@ -128,6 +130,215 @@ console.log(app.a)
                     clearInterval(this.timer)
                 }
             }
+        })
+    </script>
+</body>
+
+</html>
+```
+#### 计算属性将字符串反转(vue.js-03)
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+        {{text}}<br>
+        {{text.split(',').reverse().join(',')}}
+        逻辑过长就会变得臃肿，难以维护，所以遇到复杂的逻辑时，应当使用计算属性
+        <hr>
+        下边是使用计算属性得到的<br>
+        {{reverseText}}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        //将'123,456,789'变成'789,456,123'
+        var app = new Vue({
+            el: "#demo",
+            data: {
+                text: "123,456,789"
+            },
+            //与data同级-定义计算属性
+            computed: {
+                reverseText: function () {
+                    return this.text.split(',').reverse().join(',')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
+```
+#### 计算属性购物车总价(vue.js-03)
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+        两个购物车总计{{prices}}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        //计算购物车中的所有物品价格
+        var app = new Vue({
+            el: "#demo",
+            data: {
+                //第一个购物车
+                package1: [
+                    {
+                        name: 'iphone',
+                        price: 6999,
+                        count: 2
+                    },
+                    {
+                        name: 'iPad',
+                        price: 3600,
+                        count: 1
+                    }],
+                //第二个购物车
+                package2: [
+                    {
+                        name: 'iphone8',
+                        price: 6566,
+                        count: 3
+                    },
+                    {
+                        name: 'iPad',
+                        price: 3600,
+                        count: 6
+                    }]
+            },
+            //与data同级-定义计算属性
+            computed: {
+                prices: function () {
+                    var prices = 0;
+                    for (var i = 0; i < this.package1.length; i++) {
+                        prices += this.package1[i].price * this.package1[i].count;
+                    }
+                    for (var j = 0; j < this.package2.length; j++) {
+                        prices += this.package2[j].price * this.package2[j].count;
+                    }
+                    return prices;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
+```
+### get与set(vue.js-03)
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+        {{fullName}}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app = new Vue({
+            el: "#demo",
+            data: {
+                firstName: 'zhang',
+                lastName: 'zhe'
+            },
+            computed: {
+                //计算属性默认用法是getter函数
+                fullName: function () {
+                    return this.firstName + " " + this.lastName
+                },
+                get: function () {
+                    return this.firstName + " " + this.lastName
+                },
+                set: function (newValue) {
+                    console.log('我是set方法，我被调用')
+                    var names = newValue.split(','); //分隔为数组
+                    this.firstName = name[0];
+                    this.lastName = name[1];
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
+```
+#### 计算属性与methods方法(vue.js-03)
+
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+        {{text}}<br>
+        {{text.split(',').reverse().join(',')}}
+        逻辑过长就会变得臃肿，难以维护，所以遇到复杂的逻辑时，应当使用计算属性
+        <hr>
+        下边是使用计算属性得到的<br>
+        {{reverseText}}
+        <hr>
+        计算属性的缓存{{now}}
+        <hr>
+        通过methods拿到的时间戳(方法要加括号)
+        {{thisTime()}}
+       
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        //将'123,456,789'变成'789,456,123'
+        var app = new Vue({
+            el: "#demo",
+            data: {
+                text: "123,456,789"
+            },
+            //与data同级-定义计算属性
+            computed: {
+                reverseText: function () {
+                    return this.text.split(',').reverse().join(',')
+                },
+                now: function () {
+                    return Date.now();
+                }
+            },
+            methods: {
+                thisTime: function () {
+                    return Date.now();
+                }
+            }
+
         })
     </script>
 </body>
