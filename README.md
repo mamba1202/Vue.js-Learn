@@ -584,3 +584,59 @@ var app = new Vue({
 
 </html>
 ```
+#### 条件渲染指令 v-if和 v-show(vue.js-05)
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>条件渲染指令</title>
+</head>
+
+<body>
+    <div id="app">
+        v-if后边接等号： 等号后的内容必须是布尔值<br>
+        v-if的基本用法
+        <p v-if="6<3">{{apple}}</p>
+        <p v-else>{{banana}}</p>
+        <p v-if="6<3">{{apple}}</p>
+        <p v-else-if="9>5">{{pineapple}}</p>
+        <hr>
+        v-if的实例用法 如果不想让他复用标签或元素，加入key即可
+        需求：点击按钮，实现用户名输入框和密码输入框切换
+        <div v-if="type==='name'">
+            用户名: <input type="text" placeholder="请输入用户名" key="name">
+        </div>
+        <div v-else>
+            密码： <input type="text" placeholder="请输入密码" key="password">
+        </div>
+        <button v-on:click="toggleType">点我切换</button>
+    </div>
+    v-show用法：显现与否取决于布尔值
+    <p v-show="9>a">我被渲染</p>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                apple: "apple",
+                banana: "banana",
+                pineapple: "pineapple",
+                type: "name",
+                a: 8
+            },
+            methods: {
+                toggleType: function () {
+                    //三目运算符
+                    this.type = (this.type === "name" ? 'password' : "name")
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
+```
