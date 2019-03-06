@@ -450,3 +450,103 @@ var app = new Vue({
 
 </html>
 ```
+#### 数组和对象混用(vue.js-04)
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .divStyle {
+            background-color: blue;
+            height: 100px;
+            width: 100px;
+        }
+
+        .borderStyle {
+            border: 10px solid red;
+        }
+
+        .btnBackground {
+            background-color: darkred;
+        }
+
+        .active {
+            background-color: black;
+            height: 100px;
+            width: 100px;
+        }
+
+        .error {
+            border: 10px solid blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        数组和对象混用，第一个成员是对象，第二个成员是数组成员
+        <div :class="[{'active' : isActive},errorClass]"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                isActive: true,
+                errorClass: "error"
+            },
+        })
+    </script>
+</body>
+
+</html>
+```
+#### style对象语法与数组语法(vue.js-04)
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        style对象语法
+        绑定内联样式：键代表style的属性，值代表属性对应的值
+        <hr>
+        vue中只要是大写字母都会转换成-加小写
+        <div v-bind:style="{'color':color,'fontSize':fontSize+'px'}">哈哈</div>
+        <hr>
+        style数组语法
+        <div v-bind:style="[styleA,styleB]">
+            哈哈哈哈哈哈哈
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                color: 'blue',
+                fontSize: 18,
+                styleA: {
+                    color: red,
+                    fontSize: 18px,
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
+```

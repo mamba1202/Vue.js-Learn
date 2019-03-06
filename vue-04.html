@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        style对象语法
+        绑定内联样式：键代表style的属性，值代表属性对应的值
+        <hr>
+        vue中只要是大写字母都会转换成-加小写
+        <div v-bind:style="{'color':color,'fontSize':fontSize+'px'}">哈哈</div>
+        <hr>
+        style数组语法
+        <div v-bind:style="[styleA,styleB]">
+            哈哈哈哈哈哈哈
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                color: 'blue',
+                fontSize: 18,
+                styleA: {
+                    color: red,
+                    fontSize: 18px,
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
