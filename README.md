@@ -550,3 +550,37 @@ var app = new Vue({
 
 </html>
 ```
+#### 基本指令 v-clock和 v-once(vue.js-05)
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        v-clock:解决初始化慢导致页面闪动<br>
+        <p v-once>{{msg}}</p>
+        <hr>
+        v-once:只渲染一次，后续都不会再渲染<br>
+        <span v-once>{{oncedata}}</span>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data:{
+                msg: "湖人总冠军",
+                oncedata: "紫金王朝"
+            }
+        })
+    </script>
+</body>
+
+</html>
+```
