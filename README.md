@@ -695,3 +695,60 @@ var app = new Vue({
 
 </html>
 ```
+#### 数组更新(vue.js-05)
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组更新</title>
+</head>
+
+<body>
+    <div id="app">
+        <div v-for="study in arr">{{study}}</div>
+        <button @click="sortArr">点我排序</button>
+        <button @click="reserveArr">点我进行数组反转</button>
+        <hr>
+        <button @click="changeOne">点我改变数组的指定项</button>
+        <button @click="cahngeArrLength">改变数组长度</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                arr: ['book', 'pen', 'pencil']
+            },
+            methods: {
+                //利用sort方法排序
+                sortArr: function () {
+                    //从小到大排
+                    this.arr.sort(function (a, b) {
+                        return a.length - b.length
+                    })
+                },
+                reserveArr: function () {
+                    this.arr.reverse()
+                },
+                //改变数组的指定项
+                changeOne: function () {
+                    this.arr[0] = "car"
+                },
+                //改变数组的长度
+                cahngeArrLength: function () {
+                    this.arr.length = 1
+                }
+            }
+        })
+        //改变vue的第一项
+        Vue.set(app.arr, 1, "car")
+        //1为要操作的那个数组项 car为替换成的元素
+    </script>
+</body>
+
+</html>
+```
