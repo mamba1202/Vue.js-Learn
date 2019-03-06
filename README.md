@@ -278,8 +278,8 @@ console.log(app.a)
                 set: function (newValue) {
                     console.log('我是set方法，我被调用')
                     var names = newValue.split(','); //分隔为数组
-                    this.firstName = name[0];
-                    this.lastName = name[1];
+                    this.firstName = names[0];
+                    this.lastName = names[1];
                 }
             }
         })
@@ -339,6 +339,111 @@ console.log(app.a)
                 }
             }
 
+        })
+    </script>
+</body>
+
+</html>
+```
+#### v-bind复习(vue.js-04)
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <a v-bind:href="url">我是百度</a>
+        <img :src="imgUrl" alt="">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+var app = new Vue({
+    el: '#app',
+    data:{
+        url: 'http://baidu.com',
+        imgUrl: "图片链接地址"
+    }
+})
+</script>
+</body>
+</html>
+```
+#### class和style的绑定(vue.js-04)
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .divStyle {
+            background-color: blue;
+            height: 100px;
+            width: 100px;
+        }
+
+        .borderStyle {
+            border: 10px solid red;
+        }
+
+        .btnBackground {
+            background-color: darkred;
+        }
+
+        .active {
+            background-color: black;
+            height: 100px;
+            width: 100px;
+        }
+
+        .error {
+            border: 10px solid blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        绑定class对象语法，对象的键是类名，值是布尔值
+        <hr>
+        <div :class="{divStyle : isActive, borderStyle : isBorder}"></div>
+        <hr>
+        <input type="button" value="点击我切换背景，哈哈" :class={btnBackground:isback} v-on:click="changColor">
+        /*<div :class="className"></div>*/
+        //计算属性
+        绑定class数组语法：数组中的成员直接对应类名<br>
+        <div :class="[activeClass,errorClass]">我是数组绑定class</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                isActive: true,
+                isBorder: true,
+                isback: true,
+                activeClass: "active",
+                errorClass: "error"
+            },
+            methods: {
+                changColor: function () {
+                    this.isback = !this.isback;
+                }
+            },
+            computed: function () {
+                return {
+                    active: this.isActive && !this.isBorder
+                    //对象语法 键是类名，值是布尔
+                }
+            }
         })
     </script>
 </body>
