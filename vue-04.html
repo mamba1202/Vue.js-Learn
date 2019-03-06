@@ -5,45 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>条件渲染指令</title>
+    <title>列表渲染指令v-for</title>
 </head>
 
 <body>
     <div id="app">
-        v-if后边接等号： 等号后的内容必须是布尔值<br>
-        v-if的基本用法
-        <p v-if="6<3">{{apple}}</p>
-        <p v-else>{{banana}}</p>
-        <p v-if="6<3">{{apple}}</p>
-        <p v-else-if="9>5">{{pineapple}}</p>
-        <hr>
-        v-if的实例用法 如果不想让他复用标签或元素，加入key即可
-        需求：点击按钮，实现用户名输入框和密码输入框切换
-        <div v-if="type==='name'">
-            用户名: <input type="text" placeholder="请输入用户名" key="name">
-        </div>
-        <div v-else>
-            密码： <input type="text" placeholder="请输入密码" key="password">
-        </div>
-        <button v-on:click="toggleType">点我切换</button>
+        v-for的用法：v-for一定是写在要遍历的元素上，v-for后接等号，类似于item in items
+        遍历多个对象一定是数组
+        (1) 遍历多个对象： <br>
+        <ul>
+            <li v-for="vueMth in vueMethods">{{vueMth.name}}</li>
+        </ul>
+        <br>
+        带索引的写法：括号的第一个变量代表items，第二个变量是index
+        <ul>
+            <li v-for="(vueMth,index) in vueMethods">{{index}}----{{vueMth.name}}</li>
+        </ul>
+        <br>
+        (2)遍历一个对象的多个属性:
+        <span v-for="value in nvshen">{{value}}</span>
+        <br>
+        拿到value，key,index的写法 v-k-i--外开
+        <div v-for="(value,key,index) in nvshen">第{{index}}个女孩：--键是：{{key}}----{{value}}</div>
     </div>
-    v-show用法：显现与否取决于布尔值
-    <p v-show="9>a">我被渲染</p>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script>
         var app = new Vue({
             el: "#app",
             data: {
-                apple: "apple",
-                banana: "banana",
-                pineapple: "pineapple",
-                type: "name",
-                a: 8
-            },
-            methods: {
-                toggleType: function(){
-                    //三目运算符
-                    this.type = (this.type==="name" ? 'password' : "name")
+                //每个对象对应一个li
+                vueMethods: [
+                    { name: '湖人' },
+                    { name: '火箭' },
+                    { name: '凯尔特人' }
+                ],
+                nvshen: {
+                    gir11: '张晨曦',
+                    gir12: '张希月',
+                    gir13: '张梦瑶'
                 }
             }
         })
