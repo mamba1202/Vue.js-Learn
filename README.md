@@ -831,3 +831,66 @@ var app = new Vue({
 
 </html>
 ```
+#### 修饰符(vue.js-05)
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>方法与事件</title>
+</head>
+
+<body>
+    <div id="app">
+        <div @click="divclick" style="height: 100px; width: 100px; background: blue;">
+            <button @click.stop="btnclick">点击</button> //stop 阻止单机事件向上冒泡
+        </div>
+        <hr>
+        prevent的用法：提交事件并且不重载事件
+        form默认提交都会重载页面
+        <form action="" @submit.prevent="hangle">
+            <button type="submit">提交表单</button>
+        </form>
+        <hr>
+        once: <br>
+        <button @click="onceMethod">执行无限次</button>
+        <button @click.once="onceMethod">只执行一次</button>
+        <hr>
+        监听键盘事件
+        <input @keyup.13="submitMe">
+        <input @keyup.enter="submitMe">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                count: 0
+            },
+            methods: {
+                divclick: function () {
+                    alert('div被点击了')
+                },
+                btnclick: function () {
+                    alert('button被点击了')
+                },
+                hangle: function () {
+                    alert('我不重载，页面也不刷新')
+                },
+                onceMethod: function () {
+                    alert('哈哈')
+                },
+                submitMe: function () {
+                    alert('您按下了enter键')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
+```
