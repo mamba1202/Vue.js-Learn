@@ -752,3 +752,82 @@ var app = new Vue({
 
 </html>
 ```
+#### 数组过滤(vue.js-05)
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>过滤</title>
+</head>
+
+<body>
+    <div id="app">
+        返回字符串中含有oo的项：
+        {{matchOO}}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                arr: ['book', 'pen', 'pencil']
+            },
+            computed: {
+                matchOO: function () {
+                    return this.arr.filter(function (book) {
+                        //参数代表要过滤的每一项
+                        console.log(book)
+                        return book.match(/oo/)
+                    });
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
+```
+#### 方法与事件(vue.js-05)
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>方法与事件</title>
+</head>
+
+<body>
+    <div id="app">
+        点击次数：
+        {{count}}
+        <button @click="handle()">点击我每次加1</button> //不传参
+        <button @click="handle(8)">点击我每次加8</button> // 传参
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                count: 0
+            },
+            methods: {
+                handle: function (count) {
+                    count = count || 1 //不传参数每次加1-传参每次加8
+                    this.count += count
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
+```
