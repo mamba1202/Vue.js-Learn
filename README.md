@@ -894,3 +894,130 @@ var app = new Vue({
 
 </html>
 ```
+#### 表单与v-model(vue.js-06)
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表单与<v-mode></v-mode></title>
+</head>
+
+<body>
+    <div id="app" style="margin-bottom: 200px;">
+        v-model 用法：
+        <input type="text" v-model="value">//直接绑定data中的value(双向绑定)
+        <br>
+        {{value}} 输入框写什么页面显示什么
+        <hr>
+        <textarea name="" id="" cols="30" rows="10" v-model="msg">我是多行文本的初始化值</textarea>
+        {{msg}}
+        <hr>
+        单选框：<br>
+        单个单选框---用v-bind <input type="radio" v-bind:checked="oneradio"><br>
+        单个单选框用v-model <input type="radio" v-model="oneradio">
+        此处用v-model不生效<br>
+        多个单选框：<br>
+        科比：<input type="radio" name="checks" value="科比" v-model="checkname"><br>
+        哈登：<input type="radio" name="checks" value="哈登" v-model="checkname"><br>
+        欧文：<input type="radio" name="checks" value="欧文" v-model="checkname"><br>
+        现在选中的是---{{checkname}}
+        <hr>
+        复选框
+        单个复选框---用v-bind：<input type="checkbox" v-bind:checked="oneradio">
+        单个复选框用v-model：<input type="checkbox" v-model="oneradio">
+        <br>
+        多个复选框：
+        科比：<input type="checkbox" value="科比" v-model="checks"><br>
+        哈登：<input type="checkbox" value="哈登" v-model="checks"><br>
+        欧文：<input type="checkbox" value="欧文" v-model="checks"><br>
+        选中的是---{{checks}}
+        <br>
+        单选的下拉框
+        <select v-model="selected">
+            <option value="科比">科比</option>
+            <option value="哈登">哈登</option>
+            <option value="欧文">欧文</option>
+        </select>
+        单选的下拉框---{{selected}}
+        <hr>
+        多选的下拉框
+        <select v-model="selectedmul" multiple>
+            <option value="科比">科比</option>
+            <option value="哈登">哈登</option>
+            <option value="欧文">欧文</option>
+        </select>
+        现在选中的是---{{selectedmul}}
+        <hr style="color: black">
+        绑定值：<br>
+        单选按钮：
+        <input type="radio" v-model="picked" v-bind:value="value">
+        ---{{picked}}
+        <br>------<br>
+        复选框按钮：
+        <input type="checkbox" v-model="toggle" :true-value="value1" :false-value="value2">
+        <br>
+        {{toggle}}
+        <br>
+        被选中： {{toggle == value1}}
+        <br>
+        未被选中： {{toggle == value2}}
+        <br>
+        下拉框：
+        <select v-model="valueselect" :value="{num: 111}"> //绑定value对option没影响
+            <option value="科比">科比</option>
+            <option value="哈登">哈登</option>
+            <option value="欧文">欧文</option>
+        </select>
+        现在选中的是---{{typeof valueselect}} ----{{valueselect}}
+        <hr>
+        <select v-model="valueselect">
+            <option :value="{num: 111}">科比</option>>
+            选中的是---{{typeof valueselect}}----{{valueselect.num}}
+        </select>
+        <hr>
+        修饰符：
+        <input type="text" v-model="inputStr">-----{{inputStr}}<br>
+        <input type="text" v-model.lazy="lazyStr">-----{{lazyStr}}<br>
+        v-model 默认是在input输入时实时同步输入框的数据，而lazy修饰符，可以使其在失去焦点或者敲回车才会显示
+        <br>
+        number:
+        <input type="text" v-model.number="isNum">
+        {{typeof isNum}}
+        <br>
+        trim:
+        <input type="text" v-model.trim="trimStr">
+        <br> {{trimStr.split('').length}} // 转化成数组--- '' 一个字符就是一个成员
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                value: '',
+                msg: '',
+                oneradio: true,
+                checkname: '科比',
+                checks: [],
+                selected: '',  //[]
+                selectedmul: [], //''
+                picked: true,
+                value: '111',
+                toggle: true,
+                value1: "我被选中了",
+                value2: "我没有被选中",
+                valueselect: '',
+                inputStr: '',
+                lazyStr: '',
+                isNum: '',
+                trimStr: ''
+            }
+        })
+    </script>
+</body>
+
+</html>
+```
