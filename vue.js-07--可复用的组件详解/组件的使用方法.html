@@ -16,7 +16,7 @@
         table中只能有tr.td.tbody 这些元素
         <table>
             <!--<my-component></my-component>-->
-            <tbody is ="my-component"></tbody>
+            <tbody is="my-component"></tbody>
         </table>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -24,10 +24,11 @@
         //Vue.component(tag,{
         //template:'<div></div>
         //})
-        //全局注册组件
+        全局注册组件
         Vue.component('my-component', {
             template: '<div>我是一个组件</div>'
         })
+        局部注册组件
         var app = new Vue({
             el: '#app',
             components: {
